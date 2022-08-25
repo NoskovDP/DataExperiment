@@ -2,6 +2,7 @@
 Компьютер сам загадывает и сам угадывает число
 """
 
+from ast import If
 import numpy as np
 
 
@@ -15,12 +16,19 @@ def random_predict(number: int = 1) -> int:
         int: Число попыток
     """
     count = 0
+    n = 1
+    m = 101
 
     while True:
         count += 1
-        predict_number = np.random.randint(1, 101)  # предполагаемое число
-        if number == predict_number:
-            break  # выход из цикла если угадали
+        predict_number = np.random.randint(n, m)  # предполагаемое число
+       
+        if predict_number > number:
+            m = predict_number
+        elif predict_number < number:
+            n = predict_number
+        else:
+            break  # выход из цикла если значения совпали
     return count
 
 
